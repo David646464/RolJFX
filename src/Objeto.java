@@ -37,26 +37,26 @@ public class Objeto {
     }
 
     private int generarPrecision(Objeto.TipoObjeto objeto2) {
-        int AuxPrecision = 100;
+        int AuxPrecision = 0;
         switch (objeto2)
         {
             case ESPADA:
             AuxPrecision = 95;
             break;
             case ARCO:
-            AuxPrecision = 95;
+            AuxPrecision = 80;
             break;
             case HACHA:
-            AuxPrecision = 95;
+            AuxPrecision = 75;
             break;
             case MAZA:
-            AuxPrecision = 95;
+            AuxPrecision = 90;
             break;
             case PuntoOVA:
-            AuxPrecision = 95;
+            AuxPrecision = 5;
             break;
             case LANZA:
-            AuxPrecision = 95;
+            AuxPrecision = 100;
             break;
 
         }
