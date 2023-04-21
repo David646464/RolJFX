@@ -228,10 +228,10 @@ public class Objeto {
         
     }
     public void sumarExperiencia(int puntosXP) {
-        XP =+ puntosXP;
+        XP += puntosXP;
         if (XP >= limiteXP){
             subirNivel();
-            XP=- limiteXP;
+            XP-= limiteXP;
             limiteXP = (int) Math.round(limiteXP * 1.40);
         }
 
@@ -243,6 +243,7 @@ public class Objeto {
         daño = (int) Math.round(daño * 1.05);
         agilidad = (int) Math.round(agilidad * 1.05);
         defensa = (int) Math.round(defensa * 1.05);
+        vida = (int) Math.round(vida * 1.05);
     }
 
     public void mostrar(){
@@ -271,6 +272,9 @@ public class Objeto {
         objeto2.mostrar();
         System.out.println("==============================");
         objeto3.mostrar();
+        System.out.println("==============================");
+        objeto1.sumarExperiencia(1400);
+        objeto1.mostrar();
     }
     
 }
