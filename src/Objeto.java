@@ -1,11 +1,10 @@
 public class Objeto {
     
-    enum TipoObjeto {CASCO, PECHERA, BOTAS, PANTALONES, ESPADA, ARCO, HACHA, MAZA, PuntoOVA, LANZA,  ESCUDO, TALISMANDEVIDA, TALISMANDEDEFENSA, TALISMANDEAGILIDAD}
-    TipoObjeto objeto;
+    String[] objetos = {"CASCO", "PECHERA", "BOTAS", "PANTALONES", "ESPADA", "ARCO", "HACHA", "MAZA", "PuntoOVA", "LANZA",  "ESCUDO", "TALISMANDEVIDA", "TALISMANDEDEFENSA", "TALISMANDEAGILIDAD"};
 
-    enum Calidad {COMUN, POCOCOMUN,RARO,EPICO,LEGENDARIO}
-    Calidad calidad;
-
+    String[] Calidad = {"COMUN", "POCOCOMUN","RARO","EPICO","LEGENDARIO"};
+    String objeto;
+    String calidad;
     String nombreObjeto;
     int Nivel;
     int XP;
@@ -15,8 +14,9 @@ public class Objeto {
     int defensa;
     int vida;
     int precision;
+    int precio;
 
-    public Objeto( Objeto.TipoObjeto objeto) {
+    public Objeto( String objeto) {
         this.objeto = objeto;
         calidad = generarCalidad();
         Nivel = 1;
@@ -28,50 +28,121 @@ public class Objeto {
         vida = generarVida(objeto,calidad);
         precision = generarPrecision(objeto);
         this.nombreObjeto = generarNombre(objeto,calidad);
+        precio = generarPrecio(objeto,calidad);
     }
 
-    private Objeto.Calidad generarCalidad() {
-        Objeto.Calidad calidad = null;
+    
+
+    private int generarPrecio(String objeto2, String calidad2) {
+        int Auxprecio =0;
+        switch (objeto2)
+        {
+            case "ESPADA":
+            Auxprecio =45;
+            break;
+            case "ARCO":
+            Auxprecio =75;
+            break;
+            case "HACHA":
+            Auxprecio =55;
+            break;
+            case "MAZA":
+            Auxprecio =60;
+            break;
+            case "PuntoOVA":
+            Auxprecio =9999;
+            break;
+            case "LANZA":
+            Auxprecio =50;
+            break;
+            case "TALISMANDEAGILIDAD":
+            Auxprecio =1000;
+            break;
+            case "TALISMANDEDEFENSA":
+            Auxprecio =1000;
+            break;
+            case "TALISMANDEVIDA":
+            Auxprecio =1000;
+            break;
+            case "ESCUDO":
+            Auxprecio =100;
+            break;
+            case "BOTAS":
+            Auxprecio =65;
+            break;
+            case "CASCO":
+            Auxprecio =50;
+            break;
+            case "PECHERA":
+            Auxprecio =80;
+            break;
+            case "PANTALONES":
+            Auxprecio =75;
+            break;
+
+        }
+        switch (calidad)
+        {
+            case "COMUN":
+            Auxprecio =Auxprecio;
+            break;
+            case "POCOCOMUN":
+            Auxprecio =(int) Math.round(Auxprecio * 1.05);            break;
+            case "RARO":
+            Auxprecio =(int) Math.round(Auxprecio * 1.20);            break;
+            case "EPICO":
+            Auxprecio =(int) Math.round(Auxprecio * 1.35);            break;
+            case "LEGENDARIO":
+            Auxprecio =(int) Math.round(Auxprecio * 1.50);            break;
+            
+
+        }
+
+        return Auxprecio;
+    }
+
+    private String generarCalidad() {
+        String calidad = null;
         int probabilidad = (int) (Math.random() * 99) + 1;
         if (probabilidad >= 1 && probabilidad <= 35){
-            calidad = Calidad.COMUN;
+            calidad ="COMUN";
         }else if (probabilidad > 35 && probabilidad <= 65){
-            calidad = Calidad.POCOCOMUN;
+            calidad = "POCOCOMUN";
         }else if (probabilidad > 65 && probabilidad <= 85){
-            calidad = Calidad.RARO;
+            calidad = "RARO";
         }else if (probabilidad > 85 && probabilidad <= 95){
-            calidad = Calidad.EPICO;
+            calidad ="EPICO";
         }else if (probabilidad > 95 && probabilidad <= 100){
-            calidad = Calidad.LEGENDARIO;
+            calidad ="LEGENDARIO";
         }
 
         return calidad;
     }
 
-    private String generarNombre(Objeto.TipoObjeto objeto2,Objeto.Calidad calidad) {
+    private String generarNombre(String objeto2,String calidad) {
         return objeto2 + " (" + calidad + ")";
     }
 
-    private int generarPrecision(Objeto.TipoObjeto objeto2) {
+    private int generarPrecision(String objeto2) {
         int AuxPrecision = 0;
         switch (objeto2)
         {
-            case ESPADA:
+            case "ESPADA":
             AuxPrecision = 95;
             break;
-            case ARCO:
+            case "ARCO":
             AuxPrecision = 80;
             break;
-            case HACHA:
+            case "HACHA":
             AuxPrecision = 75;
             break;
-            case MAZA:
+            case "MAZA":
             AuxPrecision = 90;
             break;
-            case PuntoOVA:
+            case "PuntoOVA":
             AuxPrecision = 5;
             break;
-            case LANZA:
+            case "LANZA":
             AuxPrecision = 100;
             break;
 
@@ -80,23 +151,23 @@ public class Objeto {
         return AuxPrecision;
     }
 
-    private int generarVida(Objeto.TipoObjeto objeto2,Objeto.Calidad calidad) {
+    private int generarVida(String objeto2,String calidad) {
         int AuxVida = 0;
         switch (objeto2)
         {
-            case CASCO:
+            case "CASCO":
             AuxVida = 20;
             break;
-            case TALISMANDEVIDA:
+            case "TALISMANDEVIDA":
             AuxVida = 50;
             break;
-            case PECHERA:
+            case "PECHERA":
             AuxVida = 30;
             break;
-            case BOTAS:
+            case "BOTAS":
             AuxVida = 20;
             break;
-            case PANTALONES:
+            case "PANTALONES":
             AuxVida = 25;
             break;
             
@@ -107,26 +178,26 @@ public class Objeto {
         return AuxVida;
     }
 
-    private int generarDefensa(Objeto.TipoObjeto objeto2,Objeto.Calidad calidad) {
+    private int generarDefensa(String objeto2,String calidad) {
         int AuxDefensa = 0;
         switch (objeto2)
         {
-            case CASCO:
+            case "CASCO":
             AuxDefensa = 20;
             break;
-            case ESCUDO:
+            case "ESCUDO":
             AuxDefensa = 40;
             break;
-            case TALISMANDEDEFENSA:
+            case "TALISMANDEDEFENSA":
             AuxDefensa = 50;
             break;
-            case PECHERA:
+            case "PECHERA":
             AuxDefensa = 30;
             break;
-            case BOTAS:
+            case "BOTAS":
             AuxDefensa = 10;
             break;
-            case PANTALONES:
+            case "PANTALONES":
             AuxDefensa = 25;
             break;
             
@@ -137,25 +208,25 @@ public class Objeto {
         return AuxDefensa;
     }
 
-    private int generarAgilidad(Objeto.TipoObjeto objeto2,Objeto.Calidad calidad) {
+    private int generarAgilidad(String objeto2,String calidad) {
         int AuxAgilidad =0;
         switch (objeto2){
-            case TALISMANDEAGILIDAD:
+            case "TALISMANDEAGILIDAD":
             AuxAgilidad = 50;
             break;
-            case LANZA:
+            case "LANZA":
             AuxAgilidad = 20;
             break;
-            case HACHA:
+            case "HACHA":
             AuxAgilidad = -20;
             break;
-            case ESPADA:
+            case "ESPADA":
             AuxAgilidad = 10;
             break;
-            case BOTAS:
+            case "BOTAS":
             AuxAgilidad = 10;
             break;
-            case MAZA:
+            case "MAZA":
             AuxAgilidad = -10;
             break;
             
@@ -164,25 +235,25 @@ public class Objeto {
         return AuxAgilidad;
     }
 
-    private int generarDaño(Objeto.TipoObjeto objeto2,Objeto.Calidad calidad) {
+    private int generarDaño(String objeto2,String calidad) {
         int AuxDaño =0;
         switch (objeto2){
-            case ESPADA:
+            case "ESPADA":
             AuxDaño = 40;
             break;
-            case LANZA:
+            case "LANZA":
             AuxDaño = 30;
             break;
-            case HACHA:
+            case "HACHA":
             AuxDaño = 75;
             break;
-            case ARCO:
+            case "ARCO":
             AuxDaño = 65;
             break;
-            case PuntoOVA:
+            case "PuntoOVA":
             AuxDaño = 999999999;
             break;
-            case MAZA:
+            case "MAZA":
             AuxDaño = 55;
             break;
             
@@ -191,15 +262,15 @@ public class Objeto {
         return AuxDaño;
     }
    
-    public int ajustarCalidad(int puntos, Objeto.Calidad calidad){
+    public int ajustarCalidad(int puntos, String calidad){
         
-        if (calidad == Calidad.LEGENDARIO){
+        if (calidad == "LEGENDARIO"){
             puntos = (int) Math.round(puntos * 1.40);
-        } else if (calidad == Calidad.EPICO){
+        } else if (calidad == "EPICO"){
             puntos = (int) Math.round(puntos * 1.30);
-        }else if (calidad == Calidad.RARO){
+        }else if (calidad == "RARO"){
             puntos = (int) Math.round(puntos * 1.20);
-        }else if (calidad == Calidad.POCOCOMUN){
+        }else if (calidad == "POCOCOMUN"){
             puntos = (int) Math.round(puntos * 1.10);
         }else{
             puntos = puntos;
@@ -211,15 +282,15 @@ public class Objeto {
         return puntos;
 
     }
-    public int generarLimite(Objeto.Calidad calidad){
+    public int generarLimite(String calidad){
         limiteXP = 1000;
-        if (calidad == Calidad.LEGENDARIO){
+        if (calidad == "LEGENDARIO"){
             limiteXP = (int) Math.round(limiteXP * 1.40);
-        } else if (calidad == Calidad.EPICO){
+        } else if (calidad == "EPICO"){
             limiteXP = (int) Math.round(limiteXP * 1.30);
-        }else if (calidad == Calidad.RARO){
+        }else if (calidad == "RARO"){
             limiteXP = (int) Math.round(limiteXP * 1.20);
-        }else if (calidad == Calidad.POCOCOMUN){
+        }else if (calidad == "POCOCOMUN"){
             limiteXP = (int) Math.round(limiteXP * 1.10);
         }else{
             limiteXP = limiteXP;
@@ -244,6 +315,7 @@ public class Objeto {
         agilidad = (int) Math.round(agilidad * 1.05);
         defensa = (int) Math.round(defensa * 1.05);
         vida = (int) Math.round(vida * 1.05);
+        precio = (int) Math.round(precio * 1.05);
     }
 
     public void mostrar(){
@@ -256,6 +328,7 @@ public class Objeto {
         System.out.println("Aumento de defensa: " + defensa);
         System.out.println("Aumento de vida: " + vida);
         System.out.println("Precision: " + precision);
+        System.out.println("Precio: " + precio);
 
 
 
@@ -264,9 +337,9 @@ public class Objeto {
         
     }
     public static void main(String[] args) {
-        Objeto objeto1 = new Objeto(TipoObjeto.CASCO);
-        Objeto objeto2 = new Objeto(TipoObjeto.ESPADA);
-        Objeto objeto3 = new Objeto(TipoObjeto.ESCUDO);
+        Objeto objeto1 = new Objeto("CASCO");
+        Objeto objeto2 = new Objeto("ESPADA");
+        Objeto objeto3 = new Objeto("ESCUDO");
         objeto1.mostrar();
         System.out.println("==============================");
         objeto2.mostrar();
