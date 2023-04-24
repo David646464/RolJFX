@@ -122,6 +122,7 @@ public class Mapa extends Application {
     }
 
     private void mover(char ch) {
+        System.out.println("entro");
         switch (ch) {
             case 'W':
                 if (fila > 0 && mapas[nummapa][fila - 1][columna] != 1) {
