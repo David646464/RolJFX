@@ -2,7 +2,8 @@ public class Tienda {
      static int NumStock = 3;
     
      Objeto[] Stock = new Objeto[NumStock];
-     
+     static String[] objetos = Objeto.objetos;
+
      
 
     
@@ -16,7 +17,6 @@ public class Tienda {
         Stock = crearStock();
     }
     public static Objeto[] crearStock(){
-        String[] objetos = {"CASCO", "PECHERA", "BOTAS", "PANTALONES", "ESPADA", "ARCO", "HACHA", "MAZA", "PuntoOVA", "LANZA",  "ESCUDO", "TALISMANDEVIDA", "TALISMANDEDEFENSA", "TALISMANDEAGILIDAD"};
 
         Objeto[] ObjetosAux = new Objeto[NumStock];
         for (int i=0 ; i < NumStock; i++){
@@ -39,9 +39,34 @@ public class Tienda {
         System.out.println("==============================");
        
     }
+    public static  boolean comprarObjeto(Objeto objeto, Personaje personaje){
+        boolean confirmacion = false;
+        if (objeto.precio < personaje.dinero){
+            personaje.dinero -= objeto.precio;
+            confirmacion = true;
+            System.out.println("Gracias por su compra");
+            System.out.println(objeto.nombreObjeto + " ha sido añadido al inventario");
+        }else{
+            System.out.println("No hay suficiente dinero");
+        }
+        return confirmacion;
+    }
+    public static  boolean venderObjeto(Objeto objeto, Personaje personaje){
+        boolean confirmacion = true;
+
+        personaje.dinero = objeto.precio;
+        System.out.println("Gracias por su venta");
+        System.out.println(objeto.nombreObjeto + " ha sido eliminado del inventario");
+        return confirmacion;
+    }
     public static void main(String[] args) {
        Tienda tienda = new Tienda();
        tienda.mostrarTienda();
+       Personaje personaje = new Personaje("David", "HUMANO");
+       personaje.dinero = 2000;
+       personaje.mostrar();
+       System.out.println(comprarObjeto(tienda.Stock[1], personaje));
+       personaje.mostrar();
        
     }
    

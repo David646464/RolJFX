@@ -15,10 +15,11 @@ public class Personaje {
     protected int nivel;
     protected int experiencia;
     protected int puntosVida;
+    protected int dinero;
 
     // Este constructor puede lanzar una excepción si los parámetros no són válidos
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int nivel,
-            int experiencia, int puntosVida) throws IllegalArgumentException {
+            int experiencia, int puntosVida, int dinero) throws IllegalArgumentException {
         this.nombre = nombre;
 
         try {
@@ -35,14 +36,16 @@ public class Personaje {
         this.nivel = nivel >= 1 ? nivel : 1;
         this.experiencia = experiencia >= 0 ? experiencia : 0;
         this.puntosVida = puntosVida >= 1 ? puntosVida : 1;
+        this.dinero = 0;
     }
 
-    public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion) {
-        this(nombre, raza, fuerza, agilidad, constitucion, 1, 0, constitucion + 50);
+    public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int dinero) {
+        this(nombre, raza, fuerza, agilidad, constitucion, 1, 0, constitucion + 50 , 0);
+        
     }
 
     public Personaje(String nombre, String raza) {
-        this(nombre, raza, rnd1a100(), rnd1a100(), rnd1a100());
+        this(nombre, raza, rnd1a100(), rnd1a100(), rnd1a100(), 0);
     }
 
     static int rnd1a100() {
@@ -58,6 +61,7 @@ public class Personaje {
         System.out.println("Nivel: " + nivel);
         System.out.println("Experiencia: " + experiencia);
         System.out.println("Puntos de Vida: " + puntosVida);
+        System.out.println("Dinero: " + dinero);
     }
 
     @Override

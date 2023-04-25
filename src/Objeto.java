@@ -1,6 +1,6 @@
 public class Objeto {
     
-    String[] objetos = {"CASCO", "PECHERA", "BOTAS", "PANTALONES", "ESPADA", "ARCO", "HACHA", "MAZA", "PuntoOVA", "LANZA",  "ESCUDO", "TALISMANDEVIDA", "TALISMANDEDEFENSA", "TALISMANDEAGILIDAD"};
+    static String[] objetos = {"CASCO", "PECHERA", "BOTAS", "PANTALONES", "ESPADA", "ARCO", "HACHA", "MAZA", "PuntoOVA", "LANZA",  "ESCUDO", "TALISMANDEVIDA", "TALISMANDEDEFENSA", "TALISMANDEAGILIDAD"};
 
     String[] Calidad = {"COMUN", "POCOCOMUN","RARO","EPICO","LEGENDARIO"};
     String objeto;
