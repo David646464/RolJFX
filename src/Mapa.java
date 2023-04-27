@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,16 +14,16 @@ public class Mapa extends Application {
     final int CASILLA_SIZE = 30;
 
     int[][] mapa2 = {
-            { 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 3 }
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+            { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 },
+            { 1, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 4, 1 },
+            { 1, 1, 1, 1, 1, 1, 0, 0, 3, 0, 3, 0, 0, 1, 1, 1, 1, 0, 0, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1 },
+            { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
+            { 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
     };
 
     int[][] mapa = {
@@ -58,6 +59,7 @@ public class Mapa extends Application {
 
     GridPane gridPane;
     Stage stage;
+    Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -71,7 +73,7 @@ public class Mapa extends Application {
 
         VBox vbox = new VBox(gridPane, lblEstado);
 
-        Scene scene = new Scene(vbox);
+        scene = new Scene(vbox);
         scene.setOnKeyPressed(e -> mover(e.getCode().getChar().charAt(0)));
 
         primaryStage.setScene(scene);
@@ -122,73 +124,96 @@ public class Mapa extends Application {
     }
 
     private void mover(char ch) {
-        System.out.println("entro");
         switch (ch) {
             case 'W':
                 if (fila > 0 && mapas[nummapa][fila - 1][columna] != 1) {
                     if (fila > 0 && mapas[nummapa][fila - 1][columna] != 5) {
                         if (fila > 0 && mapas[nummapa][fila - 1][columna] != 4) {
-                            Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rOld.setFill(Color.WHITE);
+                            if (fila > 0 && mapas[nummapa][fila - 1][columna] != 3) {
+                                Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rOld.setFill(Color.WHITE);
 
-                            fila--;
+                                fila--;
 
-                            Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rNew.setFill(Color.BLUE);
+                                Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rNew.setFill(Color.BLUE);
+                            } else {
+                                mostrarEnemigo();
+                            }
                         } else {
                             mostrarDialogoFin();
                         }
+                    } else {
+                        mostrarTienda();
                     }
                 }
                 break;
             case 'S':
-                if (fila > 0 && mapas[nummapa][fila - 1][columna] != 1) {
-                    if (fila > 0 && mapas[nummapa][fila - 1][columna] != 5) {
-                        if (fila > 0 && mapas[nummapa][fila - 1][columna] != 4) {
-                            Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rOld.setFill(Color.WHITE);
+                if (fila > 0 && mapas[nummapa][fila + 1][columna] != 1) {
+                    if (fila > 0 && mapas[nummapa][fila + 1][columna] != 5) {
+                        if (fila > 0 && mapas[nummapa][fila + 1][columna] != 4) {
+                            if (fila > 0 && mapas[nummapa][fila + 1][columna] != 3) {
+                                Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rOld.setFill(Color.WHITE);
 
-                            fila++;
+                                fila++;
 
-                            Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rNew.setFill(Color.BLUE);
+                                Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rNew.setFill(Color.BLUE);
+                            } else {
+                                mostrarEnemigo();
+                            }
                         } else {
                             mostrarDialogoFin();
                         }
+                    } else {
+                        mostrarTienda();
                     }
                 }
                 break;
             case 'A':
-                if (fila > 0 && mapas[nummapa][fila - 1][columna] != 1) {
-                    if (fila > 0 && mapas[nummapa][fila - 1][columna] != 5) {
-                        if (fila > 0 && mapas[nummapa][fila - 1][columna] != 4) {
-                            Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rOld.setFill(Color.WHITE);
+                if (fila > 0 && mapas[nummapa][fila][columna - 1] != 1) {
+                    if (fila > 0 && mapas[nummapa][fila][columna - 1] != 5) {
+                        if (fila > 0 && mapas[nummapa][fila][columna - 1] != 4) {
+                            if (fila > 0 && mapas[nummapa][fila][columna - 1] != 3) {
+                                Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rOld.setFill(Color.WHITE);
 
-                            columna--;
+                                columna--;
 
-                            Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rNew.setFill(Color.BLUE);
+                                Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rNew.setFill(Color.BLUE);
+                            } else {
+                                mostrarEnemigo();
+                            }
                         } else {
                             mostrarDialogoFin();
                         }
+                    } else {
+                        mostrarTienda();
                     }
                 }
                 break;
             case 'D':
-                if (fila > 0 && mapas[nummapa][fila - 1][columna] != 1) {
-                    if (fila > 0 && mapas[nummapa][fila - 1][columna] != 5) {
-                        if (fila > 0 && mapas[nummapa][fila - 1][columna] != 4) {
-                            Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rOld.setFill(Color.WHITE);
+                if (fila > 0 && mapas[nummapa][fila][columna + 1] != 1) {
+                    if (fila > 0 && mapas[nummapa][fila][columna + 1] != 5) {
+                        if (fila > 0 && mapas[nummapa][fila][columna + 1] != 4) {
+                            if (fila > 0 && mapas[nummapa][fila][columna + 1] != 3) {
+                                Rectangle rOld = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rOld.setFill(Color.WHITE);
 
-                            columna++;
+                                columna++;
 
-                            Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
-                            rNew.setFill(Color.BLUE);
+                                Rectangle rNew = (Rectangle) (gridPane.getChildren().get(fila * COLUMNAS + columna));
+                                rNew.setFill(Color.BLUE);
+                            } else {
+                                mostrarEnemigo();
+                            }
                         } else {
                             mostrarDialogoFin();
                         }
+                    } else {
+                        mostrarTienda();
                     }
                 }
                 break;
@@ -210,13 +235,23 @@ public class Mapa extends Application {
     private void mostrarDialogoFin() {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("¡VICTORIA!");
-        dialog.setContentText("¡Has superado el nivel " + nummapa + "!");
+        dialog.setContentText("¡Has superado el nivel " + (nummapa + 1) + "!");
         dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK"));
         dialog.showAndWait();
+    }
+
+    private void mostrarTienda() {
+        AnchorPane root = new AnchorPane();
+        Scene newScene = new Scene(root);
+        Stage stage = (Stage) scene.getWindow();
+
+        stage.setScene(newScene);
+    }
+
+    private void mostrarEnemigo() {
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }
