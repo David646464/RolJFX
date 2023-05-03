@@ -49,7 +49,7 @@ public class Mapa extends Application {
             mapa2
     };
 
-    int nummapa = 0;
+    int nummapa = 1;
 
     int FILAS;
     int COLUMNAS;

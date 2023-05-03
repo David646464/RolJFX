@@ -16,6 +16,7 @@ public class Personaje {
     protected int experiencia;
     protected int puntosVida;
     protected int dinero;
+    protected Objeto[] inventario;
 
     // Este constructor puede lanzar una excepción si los parámetros no són válidos
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int nivel,
@@ -37,15 +38,17 @@ public class Personaje {
         this.experiencia = experiencia >= 0 ? experiencia : 0;
         this.puntosVida = puntosVida >= 1 ? puntosVida : 1;
         this.dinero = 0;
+        this.inventario = null;
     }
 
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int dinero) {
         this(nombre, raza, fuerza, agilidad, constitucion, 1, 0, constitucion + 50 , 0);
-        
+        this.inventario = null;
     }
 
     public Personaje(String nombre, String raza) {
         this(nombre, raza, rnd1a100(), rnd1a100(), rnd1a100(), 0);
+        this.inventario = null;
     }
 
     static int rnd1a100() {

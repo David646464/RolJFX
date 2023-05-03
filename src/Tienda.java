@@ -64,8 +64,11 @@ public class Tienda {
        tienda.mostrarTienda();
        Personaje personaje = new Personaje("David", "HUMANO");
        personaje.dinero = 2000;
+       System.out.println("=======================================");
        personaje.mostrar();
        System.out.println(comprarObjeto(tienda.Stock[1], personaje));
+       System.out.println("=======================================");
+
        personaje.mostrar();
        
     }
