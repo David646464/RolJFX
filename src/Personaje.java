@@ -16,7 +16,18 @@ public class Personaje {
     protected int experiencia;
     protected int puntosVida;
     protected int dinero;
-    protected Objeto[] inventario;
+    //Capacidad maxima del inventario
+    protected Objeto[] inventario ;
+    /*En equipo cada hueco equivale a un sitio donde equipar los objetos
+     * 0:Botas
+     * 1:Pantalones
+     * 2:Pechera
+     * 3:Casco
+     * 4:Arma
+     * 5:Escudo
+     * 6:Talisman
+     */
+    protected Objeto[] equipo ;
 
     // Este constructor puede lanzar una excepción si los parámetros no són válidos
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int nivel,
@@ -38,17 +49,17 @@ public class Personaje {
         this.experiencia = experiencia >= 0 ? experiencia : 0;
         this.puntosVida = puntosVida >= 1 ? puntosVida : 1;
         this.dinero = 0;
-        this.inventario = null;
+        inventario = null;
     }
 
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int dinero) {
         this(nombre, raza, fuerza, agilidad, constitucion, 1, 0, constitucion + 50 , 0);
-        this.inventario = null;
+        inventario = null;
     }
 
     public Personaje(String nombre, String raza) {
         this(nombre, raza, rnd1a100(), rnd1a100(), rnd1a100(), 0);
-        this.inventario = null;
+        inventario = null;
     }
 
     static int rnd1a100() {
@@ -66,6 +77,13 @@ public class Personaje {
         System.out.println("Puntos de Vida: " + puntosVida);
         System.out.println("Dinero: " + dinero);
     }
+
+    public void mostrarInventario() {
+        for (int i =0 ; i < inventario.length; i++){
+            System.out.println(inventario[i].nombreObjeto + ": " + inventario[i].Nivel);
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -178,4 +196,107 @@ public class Personaje {
         }
         return A;
     }
+/*En equipo cada hueco equivale a un sitio donde equipar los objetos
+     * 0:Botas
+     * 1:Pantalones
+     * 2:Pechera
+     * 3:Casco
+     * 4:Arma
+     * 5:Escudo
+     * 6:Talisman
+     */
+    public void añadirObjetoAlInventario(Objeto objeto){
+        
+        inventario = Arrays.copyOf(inventario, inventario.length + 1);
+        inventario[inventario.length - 1] = objeto; 
+        System.out.println(objeto.nombreObjeto + " ha sido anhadido al inventario");
+        System.out.println("====================================================");
+
+    }
+
+    public void equiparObjeto(Objeto objeto){
+        if (objeto.objeto == "BOTAS"){
+            if (equipo[0] == null){
+                equipo[0] = objeto;
+                sumarStats(objeto);
+            }else{
+                añadirObjetoAlInventario(equipo[0]);
+                restarStats(equipo[0]);
+                equipo[0] = objeto;
+                sumarStats(objeto);
+            }
+
+        }else if(objeto.objeto == "PANTALONES"){
+            if (equipo[1] == null){
+                equipo[1] = objeto;
+            }else{
+                añadirObjetoAlInventario(equipo[1]);
+                equipo[1] = objeto;
+            }
+
+        }else if(objeto.objeto == "PECHERA"){
+            if (equipo[2] == null){
+                equipo[2] = objeto;
+            }else{
+                añadirObjetoAlInventario(equipo[2]);
+                equipo[2] = objeto;
+            }
+
+        }else if(objeto.objeto == "CASCO"){
+            if (equipo[3] == null){
+                equipo[3] = objeto;
+            }else{
+                añadirObjetoAlInventario(equipo[3]);
+                equipo[3] = objeto;
+            }
+
+        }else if(objeto.objeto == "CASCO"){
+            if (equipo[4] == null){
+                equipo[4] = objeto;
+            }else{
+                añadirObjetoAlInventario(equipo[4]);
+                equipo[4] = objeto;
+            }
+
+        }else if(
+            objeto.objeto == "ESPADA" ||
+            objeto.objeto == "ARCO" ||
+            objeto.objeto == "HACHA" ||
+            objeto.objeto == "MAZA" ||
+            objeto.objeto == "PuntoOVA" ||
+            objeto.objeto == "LANZA" 
+            ){
+                if (equipo[5] == null){
+                    equipo[5] = objeto;
+                }else{
+                    añadirObjetoAlInventario(equipo[5]);
+                    equipo[5] = objeto;
+                }
+
+        }else if(objeto.objeto == "TALISMANDEVIDA" ||
+                 objeto.objeto == "TALISMANDEDEFENSA" ||
+                 objeto.objeto == "TALISMANDEAGILIDAD" ){
+                    if (equipo[6] == null){
+                        equipo[6] = objeto;
+                    }else{
+                        añadirObjetoAlInventario(equipo[6]);
+                        equipo[6] = objeto;
+                    }
+        }
+    }
+
+    private void restarStats(Objeto objeto) {
+        fuerza = fuerza - objeto.daño;
+        agilidad = agilidad - objeto.agilidad;
+        puntosVida = puntosVida - objeto.vida;
+        constitucion = constitucion - objeto.defensa;
+    }
+
+    private void sumarStats(Objeto objeto) {
+        fuerza = fuerza + objeto.daño;
+        agilidad = agilidad + objeto.agilidad;
+        puntosVida = puntosVida + objeto.vida;
+        constitucion = constitucion + objeto.defensa;
+    }
+    
 }
