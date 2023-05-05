@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 public class Mapa extends Application {
     final int CASILLA_SIZE = 30;
 
+    public Mapa() {
+    }
+
     int[][] mapa2 = {
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },

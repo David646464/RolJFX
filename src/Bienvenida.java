@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Bienvenida extends Application {
+    CrearPersonaje cp = new CrearPersonaje();
     public static void main(String[] args) {
         launch();
     }
@@ -40,7 +41,7 @@ public class Bienvenida extends Application {
 
         // Ir a la pantalla de creación de personaje
         btnCrearPersonaje.setOnMouseClicked(e -> {
-            CrearPersonaje cp = new CrearPersonaje();
+            
 
             try {
                 cp.start(primaryStage);

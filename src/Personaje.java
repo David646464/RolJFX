@@ -17,7 +17,7 @@ public class Personaje {
     protected int puntosVida;
     protected int dinero;
     //Capacidad maxima del inventario
-    protected Objeto[] inventario ;
+    protected Objeto[] inventario = new Objeto[0];
     /*En equipo cada hueco equivale a un sitio donde equipar los objetos
      * 0:Botas
      * 1:Pantalones
@@ -27,7 +27,7 @@ public class Personaje {
      * 5:Escudo
      * 6:Talisman
      */
-    protected Objeto[] equipo ;
+    protected Objeto[] equipo = new Objeto[7];
 
     // Este constructor puede lanzar una excepción si los parámetros no són válidos
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int nivel,
@@ -49,17 +49,27 @@ public class Personaje {
         this.experiencia = experiencia >= 0 ? experiencia : 0;
         this.puntosVida = puntosVida >= 1 ? puntosVida : 1;
         this.dinero = 0;
-        inventario = null;
+        inventario = new Objeto[0];
+       
+        for (int i = 0 ; i < 7; i++){
+            equipo[i]=new Objeto();
+        }
     }
 
     public Personaje(String nombre, String raza, int fuerza, int agilidad, int constitucion, int dinero) {
         this(nombre, raza, fuerza, agilidad, constitucion, 1, 0, constitucion + 50 , 0);
-        inventario = null;
+        inventario = new Objeto[0];
+        for (int i = 0 ; i < 7; i++){
+            equipo[i]=new Objeto();
+        }
     }
 
     public Personaje(String nombre, String raza) {
         this(nombre, raza, rnd1a100(), rnd1a100(), rnd1a100(), 0);
-        inventario = null;
+        inventario = new Objeto[0];
+        for (int i = 0 ; i < 7; i++){
+            equipo[i]=new Objeto();
+        }
     }
 
     static int rnd1a100() {
@@ -81,6 +91,12 @@ public class Personaje {
     public void mostrarInventario() {
         for (int i =0 ; i < inventario.length; i++){
             System.out.println(inventario[i].nombreObjeto + ": " + inventario[i].Nivel);
+        }
+    }
+    public void mostrarEquipo() {
+        for (int i =0 ; i < inventario.length; i++){
+            if (equipo[i] != null)
+            System.out.println(equipo[i].nombreObjeto + ": " + inventario[i].Nivel);
         }
     }
 
@@ -216,47 +232,45 @@ public class Personaje {
 
     public void equiparObjeto(Objeto objeto){
         if (objeto.objeto == "BOTAS"){
-            if (equipo[0] == null){
-                equipo[0] = objeto;
-                sumarStats(objeto);
-            }else{
+            if (equipo[0].nombreObjeto != "No hay objeto"){
                 añadirObjetoAlInventario(equipo[0]);
-                restarStats(equipo[0]);
-                equipo[0] = objeto;
-                sumarStats(objeto);
-            }
+            } 
+            restarStats(equipo[0]);
+            equipo[0] = objeto;
+            sumarStats(objeto);
+            
 
         }else if(objeto.objeto == "PANTALONES"){
-            if (equipo[1] == null){
-                equipo[1] = objeto;
-            }else{
+            if (equipo[1].nombreObjeto != "No hay objeto"){
                 añadirObjetoAlInventario(equipo[1]);
-                equipo[1] = objeto;
-            }
+            } 
+            restarStats(equipo[1]);
+            equipo[1] = objeto;
+            sumarStats(objeto);
 
         }else if(objeto.objeto == "PECHERA"){
-            if (equipo[2] == null){
-                equipo[2] = objeto;
-            }else{
+            if (equipo[2].nombreObjeto != "No hay objeto"){
                 añadirObjetoAlInventario(equipo[2]);
-                equipo[2] = objeto;
-            }
+            } 
+            restarStats(equipo[2]);
+            equipo[2] = objeto;
+            sumarStats(objeto);
 
-        }else if(objeto.objeto == "CASCO"){
-            if (equipo[3] == null){
-                equipo[3] = objeto;
-            }else{
+        }else if(objeto.objeto == "ESCUDO"){
+            if (equipo[3].nombreObjeto != "No hay objeto"){
                 añadirObjetoAlInventario(equipo[3]);
-                equipo[3] = objeto;
-            }
+            } 
+            restarStats(equipo[3]);
+            equipo[3] = objeto;
+            sumarStats(objeto);
 
         }else if(objeto.objeto == "CASCO"){
-            if (equipo[4] == null){
-                equipo[4] = objeto;
-            }else{
+            if (equipo[4].nombreObjeto != "No hay objeto"){
                 añadirObjetoAlInventario(equipo[4]);
-                equipo[4] = objeto;
-            }
+            } 
+            restarStats(equipo[4]);
+            equipo[4] = objeto;
+            sumarStats(objeto);
 
         }else if(
             objeto.objeto == "ESPADA" ||
@@ -266,22 +280,22 @@ public class Personaje {
             objeto.objeto == "PuntoOVA" ||
             objeto.objeto == "LANZA" 
             ){
-                if (equipo[5] == null){
-                    equipo[5] = objeto;
-                }else{
+                if (equipo[5].nombreObjeto != "No hay objeto"){
                     añadirObjetoAlInventario(equipo[5]);
-                    equipo[5] = objeto;
-                }
+                } 
+                restarStats(equipo[5]);
+                equipo[5] = objeto;
+                sumarStats(objeto);
 
         }else if(objeto.objeto == "TALISMANDEVIDA" ||
                  objeto.objeto == "TALISMANDEDEFENSA" ||
                  objeto.objeto == "TALISMANDEAGILIDAD" ){
-                    if (equipo[6] == null){
-                        equipo[6] = objeto;
-                    }else{
+                    if (equipo[6].nombreObjeto != "No hay objeto"){
                         añadirObjetoAlInventario(equipo[6]);
-                        equipo[6] = objeto;
-                    }
+                    } 
+                    restarStats(equipo[6]);
+                    equipo[6] = objeto;
+                    sumarStats(objeto);
         }
     }
 
@@ -298,5 +312,25 @@ public class Personaje {
         puntosVida = puntosVida + objeto.vida;
         constitucion = constitucion + objeto.defensa;
     }
-    
+    public static void main(String[] args) {
+        Objeto objeto1 = new Objeto("BOTAS");
+        Objeto objeto2 = new Objeto("ESCUDO");
+        Objeto objeto3 = new Objeto("ESPADA");
+        Personaje personaje1 = new Personaje("David", "HUMANO");
+        personaje1.mostrar();
+        System.out.println("===============================");
+        objeto1.mostrar();
+        System.out.println("===============================");
+        objeto2.mostrar();
+        System.out.println("===============================");
+        objeto3.mostrar();
+        System.out.println("===============================");
+        personaje1.añadirObjetoAlInventario(objeto1);
+        personaje1.añadirObjetoAlInventario(objeto2);
+        personaje1.añadirObjetoAlInventario(objeto3);
+        personaje1.mostrarInventario();
+        
+        
+        
+    }
 }

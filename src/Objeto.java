@@ -33,6 +33,23 @@ public class Objeto {
 
     
 
+    public Objeto() {
+        this.objeto = objeto;
+        this.calidad = "COMUN";
+        this.nombreObjeto = "No hay objeto";
+        Nivel = 0;
+        XP = 0;
+        this.limiteXP = 0;
+        this.daño = 0;
+        this.agilidad = 0;
+        this.defensa = 0;
+        this.vida = 0;
+        this.precision = 0;
+        this.precio = 0;
+    }
+
+
+
     private int generarPrecio(String objeto2, String calidad2) {
         int Auxprecio =0;
         switch (objeto2)

@@ -13,6 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class CrearPersonaje extends Application {
+    // 1.3. Personaje default
+    Personaje p = new Personaje("Sin nombre", "HUMANO");
+    Mapa mapa = new Mapa();
     public static void main(String[] args) {
         launch();
     }
@@ -35,8 +38,7 @@ public class CrearPersonaje extends Application {
 
         HBox raza = new HBox(new Label("Raza "), cmbRaza);
 
-        // 1.3. Personaje default
-        Personaje p = new Personaje("Sin nombre", "HUMANO");
+        
 
         // 1.4. Atributos (fuerza, agilidad, constitución, HP, XP, nivel)
         Label atributos = new Label("\n" +
@@ -61,7 +63,14 @@ public class CrearPersonaje extends Application {
             p.raza = cmbRaza.getValue();
             p.mostrar();
 
-            primaryStage.close();
+
+            
+            try {
+                mapa.start(primaryStage);
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         VBox crea = new VBox(crear);
